@@ -18,30 +18,8 @@
 <h3><a href="index.html">Home</a></h3>
 <hr>
 <h2>Meals</h2>
-<table style="margin-top: 10px" align="center" class="table">
-    <thead class="thead-dark">
-    <tr align="center">
-        <th scope="col">Дата/Время</th>
-        <th scope="col">Описание</th>
-        <th scope="col">Калории</th>
-    </tr>
-    </thead>
-    <tbody id="mainTable">
-    <c:forEach var="meal" items="${meals}">
 
-        <tr style="color:${meal.isExcess() ? 'red' : 'green'}" align="center">
-            <td>${meal.getDateTime().format( DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"))}</td>
-            <td>${meal.getDescription()}</td>
-            <td>${meal.getCalories()}</td>
-            <td><a href="?action=edit&Id=<c:out value="${meal.getId()}" />"><i class="fa fa-edit" style="font-size:24px">Update</i> </a></td>
-            <td><a href="?action=delete&Id=<c:out value="${meal.getId()}"/>"><i class="fa fa-remove" style="font-size:24px">Delete</i> </a></td>
-        </tr>
-
-    </c:forEach>
-    </tbody>
-</table>
-<p><a href="?action=create">Add Meal</a></p>
-<form method="POST" action='?action=create' name="addMeal">
+<form method="POST" action='?action=edit' name="addMeal">
     Description : <input
         type="text" name="description"
         value="<c:out value="${meal.getDescription()}" />" /> <br />
