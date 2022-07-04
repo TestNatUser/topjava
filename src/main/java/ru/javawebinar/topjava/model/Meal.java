@@ -14,14 +14,14 @@ import java.time.LocalTime;
         @NamedQuery(name = Meal.ALL_SORTED, query = "SELECT m FROM Meal m WHERE m.user.id=:userId ORDER BY m.dateTime DESC"),
         @NamedQuery(name = Meal.DELETE, query = "DELETE FROM Meal m WHERE m.id=:id AND m.user.id=:userId"),
         @NamedQuery(name = Meal.GET_BETWEEN, query = """
-                    SELECT m FROM Meal m
-                    WHERE m.user.id=:userId AND m.dateTime >= :startDateTime AND m.dateTime < :endDateTime ORDER BY m.dateTime DESC
-                """),
+SELECT m FROM Meal m
+ WHERE m.user.id=:userId AND m.dateTime >= :startDateTime AND m.dateTime < :endDateTime ORDER BY m.dateTime DESC
+"""),
 //        @NamedQuery(name = Meal.UPDATE, query = "UPDATE Meal m SET m.dateTime = :datetime, m.calories= :calories," +
 //                "m.description=:desc where m.id=:id and m.user.id=:userId")
 })
-@Entity
-@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date_time"}, name = "meals_unique_user_datetime_idx")})
+
+@Entity@Table(name = "meals", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "date_time"}, name = "meals_unique_user_datetime_idx")})
 public class Meal extends AbstractBaseEntity{
     public static final String ALL_SORTED = "Meal.getAll";
     public static final String DELETE = "Meal.delete";
@@ -29,6 +29,8 @@ public class Meal extends AbstractBaseEntity{
 
     private Integer id;
 
+    @Column(name = "date_time", nullable = false)
+    @NotNull
     private LocalDateTime dateTime;
 
     @Column(name = "description", nullable = false)
